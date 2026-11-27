@@ -1,4 +1,14 @@
-# Maia SDR
+# Maia SDR (PUZHI PZSDR P201Pro fork)
+
+This fork of [maia-sdr/maia-sdr](https://github.com/maia-sdr/maia-sdr) adds the `maia-hdl/projects/pzsdr_p201pro` Vivado project for the **PUZHI PZSDR P201Pro** (`XC7Z020-2CLG400` + `AD9361`/`AD9363`).
+
+- Prebuilt P201Pro DFU firmware releases and flashing instructions: [GlassOnTin/plutosdr-fw](https://github.com/GlassOnTin/plutosdr-fw/releases/latest)
+- P201Pro hardware reverse-engineering notes and pinout tables: [GlassOnTin/pzsdr-p201pro](https://github.com/GlassOnTin/pzsdr-p201pro)
+- Upstream discussion: [maia-sdr/maia-sdr#163](https://github.com/maia-sdr/maia-sdr/issues/163)
+
+---
+
+# Upstream Maia SDR README
 
 [Maia SDR](https://maia-sdr.org) is an open-source FPGA-based SDR project focusing on the [ADALM
 Pluto](https://www.analog.com/en/design-center/evaluation-hardware-and-software/evaluation-boards-kits/adalm-pluto.html).
