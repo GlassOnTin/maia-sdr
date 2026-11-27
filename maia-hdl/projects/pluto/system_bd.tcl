@@ -5,7 +5,11 @@
 # We need to do this here because adi_project_create overwrites whatever we had
 # set beforehand.
 set_property ip_repo_paths {../../ip ../../adi-hdl/library} [current_fileset]
-update_ip_catalog
+# Vivado 2025.2 requires -rebuild with the block design closed to pick up newly packaged IPs.
+set _maia_bd [get_files -quiet *.bd]
+if {$_maia_bd ne ""} { close_bd_design [current_bd_design] }
+update_ip_catalog -rebuild
+if {$_maia_bd ne ""} { open_bd_design $_maia_bd }
 
 # default ports
 
@@ -83,7 +87,12 @@ ad_ip_parameter sys_ps7 CONFIG.PCW_USB0_PERIPHERAL_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_GPIO_MIO_GPIO_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_GPIO_MIO_GPIO_IO MIO
 
-if {[info exists plutoplus]} {
+if {[info exists pzsdr_p201pro]} {
+    # PUZHI PZSDR P201Pro wires USB ULPI resetb to MIO 48
+    ad_ip_parameter sys_ps7 CONFIG.PCW_USB0_RESET_IO {MIO 48}
+    ad_ip_parameter sys_ps7 CONFIG.PCW_MIO_48_SLEW {slow}
+    ad_ip_parameter sys_ps7 CONFIG.PCW_MIO_48_PULLUP {enabled}
+} elseif {[info exists plutoplus]} {
     # Different USB reset MIO for Pluto+
     ad_ip_parameter sys_ps7 CONFIG.PCW_USB0_RESET_IO {MIO 46}
     ad_ip_parameter sys_ps7 CONFIG.PCW_MIO_46_SLEW {slow}
